@@ -52,6 +52,8 @@
     "mysql": "^2.16.0",
     "nodemon": "^1.18.4",
     "path": "^0.12.7",
+    "pg": "^7.6.1",
+    "pg-hstore": "^2.3.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-flexbox-grid": "^2.1.2",
@@ -61,6 +63,7 @@
     "react-ratings-declarative": "^3.4.1",
     "react-text-collapse": "^0.5.0",
     "save": "^2.3.2",
+    "sequelize": "^4.41.1",
     "styled-components": "^4.0.2"
   }
 }

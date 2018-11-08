@@ -1,0 +1,6 @@
+{
+    "database": "SDC",
+    "host": "localhost",
+    "dialect": "postgres",
+    "logging": false
+}

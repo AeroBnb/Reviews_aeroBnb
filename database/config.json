@@ -2,5 +2,6 @@
     "database": "SDC",
     "host": "localhost",
     "dialect": "postgres",
-    "logging": false
+    "logging": false,
+    "password": "manindu2007"
 }

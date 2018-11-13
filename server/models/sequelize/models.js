@@ -1,9 +1,9 @@
-const db = require("../../database/postgres.js");
+const db = require('../../database/postgres.js');
 const Sequelize = require("sequelize");
 
 const User = db.define('user', {
 	id: {
-		type: Sequelize.INTEGER, 
+		type: Sequelize.INTEGER,
 		autoIncrement: true,
 		primaryKey: true
 	},
@@ -23,11 +23,6 @@ const User = db.define('user', {
 		allownull: true,
 		defaultValue: null,
 	},
-	bookings_id: {
-		type: Sequelize.INTEGER,
-		allownull: false,
-	},
-
 });
 
 const Reviews = db.define('reviews', {

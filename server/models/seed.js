@@ -1,55 +1,91 @@
 const faker = require('faker');
+const casual = require('casual');
+const fs = require("fs");
 
+var userArr = [];
 
-const getUserData = function() {
-  var newUserArray = [];
-  for( let i = 0; i < 1000; i++) {
-    var arr = [];
-    for(let j = 0; j< 1000; j++) {
-      var userData = {
-        userName: faker.internet.userName(),
-        display_name: faker.name.firstName(),
-        photo_url: faker.image.imageUrl(),
-        profile_url: faker.image.imageUrl(),
-      }
-      arr.push(userData);
+const listings = [
+  "l_id",
+  "review_date",
+  "reviews",
+  "accuracy",
+  "communication",
+  "cleanliness",
+  "location",
+  "check_in",
+  "value",
+  "username",
+  "display_name",
+  "photo_url",
+]
+
+var listing = {fields: listings, header: false};
+const Json2csvListings = new Json2csvParser(listing);
+const start = Date.now();
+var prev = start;
+
+const generateUser = function(){
+  for (let i=0; i< 10000; i++) {
+    var user = {
+      userName: faker.internet.userName(),
+      display_name: faker.name.firstName(),
+      photo_url: faker.image.imageUrl(),
     }
-    newUserArray.push(arr);
+    userArr.push(user);
   }
-  return newUserArray;
-};
-// 
+}();
 
-const getReviewsData = function() {
-  var newReviewsArray = [];
-  for(let i = 0; i < 1000; i++) {
-    var arr = [];
-    for(var j=0; j< 1000; j++) {
-      var reviewsData = {
-        review_date: faker.date.past(),
-        review: faker.lorem.paragraph(),
-        accuracy: Math.floor((Math.random()) *5),
-        communication: Math.floor((Math.random()) *5),
-        cleanliness: Math.floor((Math.random()) *5),
-        location: Math.floor((Math.random()) *5),
-        check_in: Math.floor((Math.random())*5),
-        value: Math.floor((Math.random()) * 5),
-        // address: faker.address.streetAddress(),
-        listings_id: ((Math.random() + 1) * 100),
-        user_id: ((Math.random() + 1) * 100),
-      }
-      arr.push(reviewsData);
+
+const reviewGenerator = function(){
+  var reviewArr = [];
+  for (let i=0; i< casual.integer(3, 6); i++) {
+    var review = {
+      review_date: faker.date.past(),
+      reviews: faker.lorem.paragraph(),
+      accuracy: Math.floor((Math.random()) *5),
+      communication: Math.floor((Math.random()) *5),
+      cleanliness: Math.floor((Math.random()) *5),
+      location: Math.floor((Math.random()) *5),
+      check_in: Math.floor((Math.random())*5),
+      value: Math.floor((Math.random()) * 5),
+      user: userArr[(Math.floor(Math.random() * userArr.length))]
     }
-    newReviewsArray.push(arr);
-    console.log(i);
+    reviewArr.push(review);
   }
-  return newReviewsArray;
+  return reviewArr;
 }
 
-var newUserArray = getUserData();
-// console.log(newUserArray);
-// var newBookingsArray = getBookingsData();
-var newReviewsArray = getReviewsData();
 
-module.exports = {newUserArray, newReviewsArray};
-//module.exports = {newUserArray};
+ console.log(start);
+const getUserData = async function() {
+  var count = 1;
+  var listingsData = [];
+  for( let i = 0; i < 10000; i++) {
+    await new Promise((resolve, reject) => {
+      var batch = '';
+      for(let j = 0; j< 1000; j++) {
+        var userData = {
+          l_id: count,
+          review: reviewGenerator()
+        }
+         batch += JSON.stringify(userData, null, 3)
+        count++;
+      }
+      resolve (batch);
+    }).then(async batch => {
+      await fs.appendFile('./listings.json', batch, (err) => {
+        if(err) {
+          console.error(err);
+          return;
+        }
+      })
+      console.log(
+        "User " + i + " took " + (Date.now() - prev) / 1000 + " seconds."
+      );
+      prev = Date.now();
+    });
+  }
+  var end = Date.now();
+  console.log("User Generation took " + (end - start) / 1000 + " seconds.");
+}();
+

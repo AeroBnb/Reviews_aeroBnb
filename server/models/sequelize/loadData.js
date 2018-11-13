@@ -2,30 +2,7 @@ const {User} = require('./models.js');
 const {Reviews} = require('./models.js');
 const {Listings} = require('./models.js');
 
-// const tables = require('./seed.js');
 const faker = require('faker');
-
-// const reviewData = tables.newReviewsArray;
-// console.log(reviewData);
-
-// var reviewStart = Date.now();
-// Reviews.sync({force: true})
-//   .then(async () => {
-//     var now = new Date();
-//     console.log('before waiting: ', now)  
-//     reviewData.forEach(async (review) => {
-//         await Reviews.bulkCreate(review);
-//       console.log('time passed: ', new Date() - now)
-//       var end = Date.now();
-//       console.log((end-reviewStart)/1000);
-//     })
-//   })
-//   .catch((err) => {
-//     console.log('I am getting the error', err);
-//   })
-
-
-
 
 var  start = Date.now();
 User.sync({force:true})

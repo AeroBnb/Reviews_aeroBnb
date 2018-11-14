@@ -4,23 +4,6 @@ const fs = require("fs");
 
 var userArr = [];
 
-const listings = [
-  "l_id",
-  "review_date",
-  "reviews",
-  "accuracy",
-  "communication",
-  "cleanliness",
-  "location",
-  "check_in",
-  "value",
-  "username",
-  "display_name",
-  "photo_url",
-]
-
-var listing = {fields: listings, header: false};
-const Json2csvListings = new Json2csvParser(listing);
 const start = Date.now();
 var prev = start;
 
@@ -73,19 +56,23 @@ const getUserData = async function() {
       }
       resolve (batch);
     }).then(async batch => {
-      await fs.appendFile('./listings.json', batch, (err) => {
-        if(err) {
-          console.error(err);
-          return;
-        }
+      await new Promise ((resolve, reject) => {
+        fs.writeFile('./listings.json', batch, (err) => {
+          resolve();
+          if(err) {
+            console.error(err);
+            return;
+          }
+        })
       })
+
       console.log(
         "User " + i + " took " + (Date.now() - prev) / 1000 + " seconds."
       );
       prev = Date.now();
-    });
+    })
   }
   var end = Date.now();
-  console.log("User Generation took " + (end - start) / 1000 + " seconds.");
+  console.log("User Generation took " + (end - start) / 1000 + " seconds. to insert 10,000,000");
 }();
 

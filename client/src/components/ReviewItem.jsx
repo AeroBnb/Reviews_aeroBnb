@@ -14,7 +14,6 @@ export default class ReviewItem extends React.Component {
 
   componentDidMount() {
     if (this.props.review.review.length > 280) {
-      console.log('hello');
       this.setState({
         truncate: true
       });

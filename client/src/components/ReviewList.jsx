@@ -10,8 +10,8 @@ export default class ReviewList extends React.Component {
   }
 
   render() {
-  const review = this.props.reviews.map((review) => {
-    return <ReviewItem key={review.b_id} review={review}/>
+  const review = this.props.reviews.map((review, id) => {
+    return <ReviewItem key={id} review={review}/>
   });
   
     return (

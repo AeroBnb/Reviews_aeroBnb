@@ -6,28 +6,10 @@ const {Listings} = require('./model.js');
 const postgres = require('../../../database/postgres.js');
 
 module.exports = {
-  // getAllReviews: (listingID, callback) => {
-  //   const SQLquery = `SELECT *
-  //   FROM Reviews
-  //   INNER JOIN Bookings
-  //   ON Reviews.bookings_id = Bookings.b_id
-  //   LEFT JOIN Users
-  //   ON Bookings.users_id = Users.u_id
-  //   WHERE Bookings.listings_id = ${listingID}
-  //   ORDER BY Reviews.review_date DESC;`;
-  //   db.query(SQLquery, (error, response) => {
-  //     if (error) {
-  //       console.error(error);
-  //     } else {
-  //       callback(response);
-  //     }
-  //   });
-  // },
-
   getAllReviews: (listingID, callback) => {
     var start = Date.now();
     Listings.findOne({id: listingID})
-      //.sort({"review.review_date": -1})
+      .sort({"review.review_date": -1})
       .exec(function(err, data) {
         if(err) {
           console.log('error');
@@ -37,44 +19,78 @@ module.exports = {
         }
       });
   },
-
+ 
   getRatings: (listingID, callback) => {
-    let SQLquery = `SELECT AVG(accuracy) AS accuracy, AVG(communication) AS communication, AVG(cleanliness) as cleanliness, AVG(\`location\`) as location, AVG(\`check-in\`) as checkin, AVG(\`value\`) as value
-    FROM Reviews
-    INNER JOIN Bookings
-    ON Reviews.bookings_id = Bookings.b_id
-    LEFT JOIN Users
-    ON Bookings.users_id = Users.u_id
-    WHERE Bookings.listings_id = ${listingID};`;
-    db.query(SQLquery, (error, response) => {
-      if (error) {
-        console.error(error);
-      } else {
-        callback(response);
-      }
-    });
-  },
-  // getRatings: () => {
+    var start = Date.now();
+    Listings.findOne({id: listingID}).select('avg_score -_id')
+      .exec(function(err, data) {
+        if(err) {
+          console.log('error');
+        } else {
+          callback(data);
+          console.log((Date.now() - start) / 1000);
+        }
+      });
 
-  // },
+  },
 
   search: (listingID, query, callback) => {
-    const SQLquery = `SELECT *
-    FROM Reviews
-    INNER JOIN Bookings
-    ON Reviews.bookings_id = Bookings.b_id
-    LEFT JOIN Users
-    ON Bookings.users_id = Users.u_id
-    WHERE Bookings.listings_id = ${listingID}
-    AND Reviews.review LIKE "${query}"
-    ORDER BY Reviews.review_date DESC;`;
+    var start = Date.now();
+    Listings.findOne({id: listingID, reviews: new RegExp(`^ ${query}$`, "i")})
+      .exec(function(err, data) {
+        if(err) {
+          console.log('error');
+        } else {
+          callback(data);
+          console.log((Date.now() - start) / 1000);
+        }
+      });
 
-    db.query(SQLquery, (error, response) => {
-      if (error) {
-        console.error(error);
-      } else {
-        callback(response);
-      }
-    });
   },
+
+  postReviews: (listingID, body, callback) => {
+    var start = Date.now();
+    Listings.update({id: listingID}, {$set: {reviews: body}})
+      .exec(function(err, data) {
+        if(err) {
+          console.log('error');
+        } else {
+          console.log(data);
+          console.log((Date.now() - start) / 1000);
+        }
+      });
+    console.log('In the post Review')
+
+  },
+
+  updateReviews: (listingID, query, callback) => {
+    // var start = Date.now();
+    // Listings.findOne({id: listingID, reviews: new RegExp(`^ ${query}$`, "i")})
+    //   .exec(function(err, data) {
+    //     if(err) {
+    //       console.log('error');
+    //     } else {
+    //       callback(data);
+    //       console.log((Date.now() - start) / 1000);
+    //     }
+    //   });
+    console.log('In the update Review')
+  },
+
+  deleteReviews: (listingID, query, callback) => {
+    // var start = Date.now();
+    // Listings.findOne({id: listingID, reviews: new RegExp(`^ ${query}$`, "i")})
+    //   .exec(function(err, data) {
+    //     if(err) {
+    //       console.log('error');
+    //     } else {
+    //       callback(data);
+    //       console.log((Date.now() - start) / 1000);
+    //     }
+    //   });
+    console.log('In the delete Review');
+  }
+
+
+
 };

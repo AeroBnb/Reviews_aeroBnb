@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const controller = require('./controller/mongo/controller.js');
+const seqController = require('./controller/sequelize/controller.js');
 
 const router = express.Router();
 
@@ -10,6 +11,14 @@ router.get('/search', controller.search);
 router.post('/reviews', controller.postReviews);
 router.put('/reviews', controller.updateReviews);
 router.delete('/reviews', controller.deleteReviews);
+
+router.get('/seq/reviews', seqController.getAllReviews);
+router.get('/seq/ratings', seqController.getRatings);
+router.get('/seq/search', seqController.search);
+router.post('/seq/reviews', seqController.postReviews);
+router.put('/seq/reviews', seqController.updateReviews);
+router.delete('/seq/reviews', seqController.deleteReviews);
+
 
 // Changes made
 

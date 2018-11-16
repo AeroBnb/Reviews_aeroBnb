@@ -3,18 +3,18 @@ const mongoDB = require('../../../database/mongoDB.js');
 const {Listings} = require('./model.js');
 // const {Users} = require('./model.js');
 
-const postgres = require('../../../database/postgres.js');
+const postgres = require('../../../database/postgres/postgres');
 
 module.exports = {
   getAllReviews: (listingID, callback) => {
     var start = Date.now();
     Listings.findOne({id: listingID})
-      .sort({"review.review_date": -1})
       .exec(function(err, data) {
         if(err) {
           console.log('error');
         } else {
-          callback(data);
+          var reviews = Object.values(data.reviews);
+          callback(reviews);
           console.log((Date.now() - start) / 1000);
         }
       });
@@ -27,7 +27,7 @@ module.exports = {
         if(err) {
           console.log('error');
         } else {
-          callback(data);
+          callback([data.avg_score]);
           console.log((Date.now() - start) / 1000);
         }
       });
@@ -50,10 +50,10 @@ module.exports = {
 
   postReviews: (listingID, body, callback) => {
     var start = Date.now();
-    Listings.update({id: listingID}, {$set: {reviews: body}})
+    Listings.update({id: listingID}, {$addToSet: {reviews: body}})
       .exec(function(err, data) {
         if(err) {
-          console.log('error');
+          console.log('error', err);
         } else {
           console.log(data);
           console.log((Date.now() - start) / 1000);

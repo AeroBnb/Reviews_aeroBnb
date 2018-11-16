@@ -1,12 +1,12 @@
 const Sequelize = require('sequelize');
-const config = require('./config.json');
+const config = require('../../config.js');
 
 
 // const Sequelize = require('sequelize');
 // const password = require('../config.js').DB_PASSWORD;
 
 const db  = new Sequelize('SDC', 'indy', config.password, {
-	dialect: config.dialect,
+	dialect: 'postgres',
 	pool: {
 		max: 30,
 		min: 0,
@@ -31,5 +31,5 @@ db.authenticate()
 
 
 
-module.exports = db;
+module.exports = {db};
 

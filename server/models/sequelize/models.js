@@ -1,4 +1,4 @@
-const db = require('../../database/postgres.js');
+const {db} = require('../../../database/postgres/postgres');
 const Sequelize = require("sequelize");
 
 const User = db.define('user', {
@@ -78,7 +78,4 @@ const Listings = db.define('listings', {
 	}
 })
 
-
-module.exports.User = User;
-module.exports.Listings = Listings;
-module.exports.Reviews = Reviews;
+module.exports = {User, Listings, Reviews};

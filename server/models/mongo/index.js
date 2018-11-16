@@ -3,7 +3,7 @@ const mongoDB = require('../../../database/mongoDB.js');
 const {Listings} = require('./model.js');
 // const {Users} = require('./model.js');
 
-const postgres = require('../../../database/postgres.js');
+const postgres = require('../../../database/postgres/postgres');
 
 module.exports = {
   getAllReviews: (listingID, callback) => {

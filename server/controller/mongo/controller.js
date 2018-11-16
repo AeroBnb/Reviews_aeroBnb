@@ -3,14 +3,12 @@ const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteRev
 module.exports = {
   getAllReviews: (req, res) => {
     getAllReviews(req.query.id, (response) => {
-      console.log(response)
       res.send(response);
     });
   },
 
   getRatings: (req, res) => {
     getRatings(req.query.id, (response) => {
-      console.log(response);
       res.send(response);
     });
   },

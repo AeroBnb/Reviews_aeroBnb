@@ -60,12 +60,12 @@ const avgScoreFunc = function(reviewObj) {
     value += arrOfValues[i].value;
   }
   return {
-    communication: Math.floor(communication / length),
-    accuracy: Math.floor(accuracy / length),
-    cleanliness: Math.floor(cleanliness / length),
-    location: Math.floor(location / length),
-    check_in: Math.floor(check_in / length),
-    value: Math.floor(value / length),
+    communication: (communication / length),
+    accuracy: (accuracy / length),
+    cleanliness: (cleanliness / length),
+    location: (location / length),
+    check_in: (check_in / length),
+    value: (value / length),
   }
 }
 

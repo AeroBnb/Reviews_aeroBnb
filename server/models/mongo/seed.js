@@ -1,6 +1,8 @@
 const faker = require('faker');
 const casual = require('casual');
 const fs = require("fs");
+const exec = require('child_process').exec;
+
 
 var userArr = [];
 
@@ -45,11 +47,10 @@ const reviewGenerator = function(){
 }
 
 // helper function for keeping the average score
-const avgScoreFunc = function() {
-  var reviewObj = reviewGenerator().reviewObj;
+const avgScoreFunc = function(reviewObj) {
   var arrOfValues = Object.values(reviewObj);
   var communication = 0, accuracy = 0, cleanliness =0, location = 0, check_in = 0, value = 0;
-  var length = arrOfValues.length - 1;
+  var length = arrOfValues.length;
   for(var i = 0; i< length; i++) {
     communication += arrOfValues[i].communication;
     accuracy += arrOfValues[i].accuracy;
@@ -68,47 +69,56 @@ const avgScoreFunc = function() {
   }
 }
 
-const totalReview = function() {
-  return (Object.values(reviewGenerator().reviewObj).length);
+const totalReview = function(reviewObj) {
+  return (Object.values(reviewObj).length);
 }
 
 console.log(start);
 const getUserData = async function() {
   var count = 1;
-  var batch = '';
   var listingsData = [];
-  for( let i = 0; i < 100; i++) {
+  for( let i = 0; i < 1000; i++) {
+    var batch = '';
     await new Promise((resolve, reject) => {
-      for(let j = 0; j< 1000; j++) {
+      for(let j = 0; j< 10000; j++) {
+        var generatedReviews = reviewGenerator();
         var userData = {
           id: count,
-          reviews: reviewGenerator().reviewObj,
-          avg_score: avgScoreFunc(),
-          total_reviews: totalReview(),
-          top_Five: reviewGenerator().topTenUsers,
+          reviews: generatedReviews.reviewObj,
+          avg_score: avgScoreFunc(generatedReviews.reviewObj),
+          total_reviews: totalReview(generatedReviews.reviewObj),
+          top_Five: generatedReviews.topTenUsers,
         }
         batch += JSON.stringify(userData, null, 3)
         count++;
       }
-      resolve (batch);
-    }).then(async batch => {
-      await new Promise ((resolve, reject) => {
-        fs.writeFile('./many.json', batch, (err) => {
-          resolve();
-          if(err) {
-            console.error(err);
-            return;
-          }
-        })
-      })
 
-      console.log(
-        "User " + i + " took " + (Date.now() - prev) / 1000 + " seconds."
-      );
-      prev = Date.now();
+      fs.appendFile('./many.json', batch, (err) => {
+        console.log(
+          "User " + i + " took " + (Date.now() - prev) / 1000 + " seconds."
+        );
+        prev = Date.now();
+        resolve();
+        if(err) {
+          console.error(err);
+          return;
+        }
+
+      })
     })
   }
   var end = Date.now();
   console.log("User Generation took " + (end - start) / 1000 + " seconds. to insert 10,000,000");
+
+  var yourscript = exec('mongoimport --db SDCupdated --collection Listings  --file ./many.json',
+        (error, stdout, stderr) => {
+            console.log(`${stdout}`);
+            console.log(`${stderr}`);
+            if (error !== null) {
+                console.log(`exec error: ${error}`);
+            }
+        });
+
 }();
 
+//module.exports = {getUserData}

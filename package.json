@@ -7,7 +7,6 @@
     "server-dev": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "seed-mongo": "node ./server/models/mongo/seed.js",
-    "populate": "node ./server/models/mongo/loadData.js",
     "seed-sequelize": "node ./server/models/sequelize/loadData.js",
     "seed1": "mysql -u root < ./database/schema.sql",
     "seed2": "mysql -u root < ./database/data.sql",

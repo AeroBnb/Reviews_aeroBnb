@@ -50,7 +50,7 @@ module.exports = {
 
   postReviews: (listingID, body, callback) => {
     var start = Date.now();
-    Listings.update({id: listingID}, {$set: {reviews: body}})
+    Listings.update({id: listingID}, {$addToSet: {reviews: body}})
       .exec(function(err, data) {
         if(err) {
           console.log('error');

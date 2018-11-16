@@ -1,4 +1,4 @@
-const { getAllReviews, getRatings, search } = require('../../models/mongo/index.js');
+const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteReviews} = require('../../models/mongo/index.js');
 
 module.exports = {
   getAllReviews: (req, res) => {
@@ -10,6 +10,7 @@ module.exports = {
 
   getRatings: (req, res) => {
     getRatings(req.query.id, (response) => {
+      console.log(response);
       res.send(response);
     });
   },
@@ -19,4 +20,28 @@ module.exports = {
       res.send(response);
     });
   },
+
+  postReviews: (req, res) => {
+    console.log(req.query);
+    console.log(req.body)
+    postReviews(req.query.id, req.body, (response) => {
+      console.log(response)
+      res.send(response);
+    });
+  },
+
+  updateReviews: (req, res) => {
+    updateReviews(req.query.id, req.query.query,(response) => {
+      console.log(response)
+      res.send(response);
+    });
+  },
+
+  deleteReviews: (req, res) => {
+    deleteReviews(req.query.id, req.query.query,(response) => {
+      console.log(response)
+      res.send(response);
+    });
+  },
+
 };

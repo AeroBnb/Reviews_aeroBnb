@@ -7,9 +7,9 @@ const router = express.Router();
 router.get('/reviews', controller.getAllReviews);
 router.get('/ratings', controller.getRatings);
 router.get('/search', controller.search);
-// router.post('/reviews', controller.postReviews);
-// router.put('/reviews', controller.updateReviews);
-// router.delete('/reviews', controller.deleteReviews);
+router.post('/reviews', controller.postReviews);
+router.put('/reviews', controller.updateReviews);
+router.delete('/reviews', controller.deleteReviews);
 
 // Changes made
 

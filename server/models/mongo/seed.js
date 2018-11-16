@@ -49,7 +49,7 @@ const avgScoreFunc = function() {
   var reviewObj = reviewGenerator().reviewObj;
   var arrOfValues = Object.values(reviewObj);
   var communication = 0, accuracy = 0, cleanliness =0, location = 0, check_in = 0, value = 0;
-  var length = arrOfValues.length;
+  var length = arrOfValues.length - 1;
   for(var i = 0; i< length; i++) {
     communication += arrOfValues[i].communication;
     accuracy += arrOfValues[i].accuracy;

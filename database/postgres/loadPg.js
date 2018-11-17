@@ -1,4 +1,4 @@
-const knex = require('./index.js');
+const knex = require('../postgres/index');
 
 exports.insertReviewsPG = (reviewsArr) => {
   knex.batchInsert('topbunk.reviews', reviewsArr, 625);

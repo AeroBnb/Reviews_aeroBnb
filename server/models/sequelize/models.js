@@ -1,4 +1,4 @@
-const {db} = require('../../../database/postgres/postgres');
+const {db} = require('../../../database/sequelize/postgres');
 const Sequelize = require("sequelize");
 
 const User = db.define('user', {
@@ -78,4 +78,9 @@ const Listings = db.define('listings', {
 	}
 })
 
+
+// Reviews.belongsTo(Listings);
+// Listings.hasMany(Reviews);
+// Reviews.belongsTo(User);
+// User.hasMany(Reviews);
 module.exports = {User, Listings, Reviews};

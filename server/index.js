@@ -4,7 +4,7 @@ const path = require('path');
 const cors = require('cors');
 
 //const db = require('../database/index.js');
-const postgres = require('../database/postgres/postgres.js')
+const postgres = require('../database/sequelize/postgres.js')
 const router = require('./router.js');
 
 const app = express();

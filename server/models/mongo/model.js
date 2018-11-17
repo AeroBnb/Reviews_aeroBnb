@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var db = require('../../../database/mongoDB.js')
+var db = require('../../../database/mongoDB/mongoDB')
 
 // var listingSchema = mongoose.Schema({
 //   l_id: Number,

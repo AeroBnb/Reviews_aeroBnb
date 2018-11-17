@@ -6,6 +6,16 @@ const Op = postgres.db.Op;
 
 
 module.exports = {
+  getAllListingID: (callback) => {
+    postgres.db.query(`SELECT listings_id
+    FROM Reviews
+    ORDER BY Reviews.listings_id`)
+      .then ((response, err) => {
+        if(err) console.log(err);
+        callback(response);
+      })
+  },
+  
   getAllReviews: (listingID, callback) => {
     const SQLquery = `SELECT *
     FROM Reviews

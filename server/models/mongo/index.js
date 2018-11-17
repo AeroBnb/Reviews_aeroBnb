@@ -1,9 +1,9 @@
-const db = require('../../../database/index.js');
-const mongoDB = require('../../../database/mongoDB.js');
+const db = require('../../../database/mySQL/index');
+const mongoDB = require('../../../database/mongoDB/mongoDB');
 const {Listings} = require('./model.js');
 // const {Users} = require('./model.js');
 
-const postgres = require('../../../database/postgres/postgres');
+const postgres = require('../../../database/sequelize/postgres');
 
 module.exports = {
   getAllReviews: (listingID, callback) => {
@@ -15,7 +15,7 @@ module.exports = {
         } else {
           var reviews = Object.values(data.reviews);
           callback(reviews);
-          console.log((Date.now() - start) / 1000);
+          console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
         }
       });
   },
@@ -28,7 +28,7 @@ module.exports = {
           console.log('error');
         } else {
           callback([data.avg_score]);
-          console.log((Date.now() - start) / 1000);
+          console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
         }
       });
 
@@ -42,7 +42,7 @@ module.exports = {
           console.log('error');
         } else {
           callback(data);
-          console.log((Date.now() - start) / 1000);
+          console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
         }
       });
 
@@ -56,7 +56,7 @@ module.exports = {
           console.log('error', err);
         } else {
           console.log(data);
-          console.log((Date.now() - start) / 1000);
+          console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
         }
       });
     console.log('In the post Review')

@@ -11,9 +11,10 @@ module.exports = {
     Listings.findOne({id: listingID})
       .exec(function(err, data) {
         if(err) {
-          console.log('error');
+          console.log('error: ', err);
         } else {
           var reviews = Object.values(data.reviews);
+          console.log(reviews);
           callback(reviews);
           console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
         }
@@ -50,7 +51,20 @@ module.exports = {
 
   postReviews: (listingID, body, callback) => {
     var start = Date.now();
-    Listings.update({id: listingID}, {$addToSet: {reviews: body}})
+    var obj = {
+      review_date: body.review_date,
+      reviews: body.reviews,
+      accuracy: body.accuracy,
+      communication: body.communication,
+      cleanliness: body.cleanliness,
+      location: body.location,
+      check_in: body.check_in,
+      value: body.value,
+      display_name: body.display_name,
+      photo_url: body.photo_url
+    }
+    Listings.update({id: listingID, "config.id": {"$eq": listingID}}, {"$push": {reviews: {obj}}})
+      // Listings.update({id: listingID}, {reviews: {obj}}, {upsert: true})
       .exec(function(err, data) {
         if(err) {
           console.log('error', err);
@@ -63,31 +77,44 @@ module.exports = {
 
   },
 
-  updateReviews: (listingID, query, callback) => {
-    // var start = Date.now();
-    // Listings.findOne({id: listingID, reviews: new RegExp(`^ ${query}$`, "i")})
-    //   .exec(function(err, data) {
-    //     if(err) {
-    //       console.log('error');
-    //     } else {
-    //       callback(data);
-    //       console.log((Date.now() - start) / 1000);
-    //     }
-    //   });
+  updateReviews: (listingID, body, callback) => {
+    var start = Date.now();
+    var obj = {
+      review_date: body.review_date,
+      reviews: body.reviews,
+      accuracy: body.accuracy,
+      communication: body.communication,
+      cleanliness: body.cleanliness,
+      location: body.location,
+      check_in: body.check_in,
+      value: body.value,
+      display_name: body.display_name,
+      photo_url: body.photo_url
+    }
+    // Listings.update({id: listingID}, {$addToSet: {reviews: body.reviews}})
+      Listings.update({id: listingID}, {reviews: {obj}}, {upsert: true})
+      .exec(function(err, data) {
+        if(err) {
+          console.log('error', err);
+        } else {
+          console.log(data);
+          console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
+        }
+      });
     console.log('In the update Review')
   },
 
   deleteReviews: (listingID, query, callback) => {
-    // var start = Date.now();
-    // Listings.findOne({id: listingID, reviews: new RegExp(`^ ${query}$`, "i")})
-    //   .exec(function(err, data) {
-    //     if(err) {
-    //       console.log('error');
-    //     } else {
-    //       callback(data);
-    //       console.log((Date.now() - start) / 1000);
-    //     }
-    //   });
+    var start = Date.now();
+    Listings.update({id: listingID, username: query.display_name}, {"$unset": {reviews: {display_name: {}}} })
+      .exec(function(err, data) {
+        if(err) {
+          console.log('error');
+        } else {
+          callback(data);
+          console.log((Date.now() - start) / 1000);
+        }
+      });
     console.log('In the delete Review');
   }
 

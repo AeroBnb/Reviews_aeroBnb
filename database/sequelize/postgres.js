@@ -1,22 +1,27 @@
 const Sequelize = require('sequelize');
-const config = require('../../config.js');
+//const config = require('../../config.js');
 
 
 // const Sequelize = require('sequelize');
 // const password = require('../config.js').DB_PASSWORD;
 
-const db  = new Sequelize('SDCupdated', 'indy', config.password, {
-	dialect: 'postgres',
-	pool: {
-		max: 30,
-		min: 0,
-		idle: 10000000,
-		acquire: 10000000
-	},
-	logging: false
-});
+// const db  = new Sequelize('SDCupdated', config.username, config.password, {
+// 	host: 'localhost',
+// 	dialect: 'postgres',
+// 	pool: {
+// 		max: 30,
+// 		min: 0,
+// 		idle: 10000000,
+// 		acquire: 10000000
+// 	},
+// 	logging: false
+// });
 
-// const db = new Sequelize('postgres://localhost:5432/SDCupdated', {
+const db = new Sequelize('postgres://localhost:5432/SDCupdated', {
+  logging: false
+})
+
+// const db = new Sequelize('postgres://indu:manindu2007@example.com/SDCupdated', {
 //   logging: false
 // })
 

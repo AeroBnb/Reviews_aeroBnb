@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 
-//const db = require('../database/index.js');
+const db = require('../database/postgres/index.js');
 const postgres = require('../database/sequelize/postgres.js')
 const router = require('./router.js');
 

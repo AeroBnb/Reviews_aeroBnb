@@ -1,36 +1,36 @@
 DROP DATABASE IF EXISTS SDC;
 CREATE DATABASE SDC;
-USE SDC;
+\c SDC;
+
+DROP TABLE IF EXISTS Listings;
 
 CREATE TABLE Listings (
-  l_id SERIAL PRIMARY KEY
+  l_id SERIAL PRIMARY KEY,
+  address TEXT
 );
 
+DROP TABLE IF EXISTS Users;
+
 CREATE TABLE Users (
-  u_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   username TEXT,
   display_name TEXT,
   photo_url TEXT,
   profile_url TEXT
 );
 
-CREATE TABLE Bookings (
-  b_id SERIAL PRIMARY KEY,
-  listing_id INTEGER NOT NULL,
-  user_id INTEGER NOT NULL,
-  stay_start DATE,
-  stay_end DATE
-);
+DROP TABLE IF EXISTS Reviews;
 
 CREATE TABLE Reviews (
   r_id SERIAL PRIMARY KEY,
-  booking_id INTEGER NOT NULL,
+  listings_id INTEGER NOT NULL,
+  user_id INTEGER NOT NULL,
   review_date DATE,
-  review_text TEXT,
+  reviews TEXT,
   accuracy SMALLINT,
   communication SMALLINT,
   cleanliness SMALLINT,
   location SMALLINT,
-  checkin SMALLINT,
+  check_in SMALLINT,
   value SMALLINT
 );

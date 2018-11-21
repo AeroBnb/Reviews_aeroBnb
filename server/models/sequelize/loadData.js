@@ -9,23 +9,20 @@ User.sync({force:true})
   .then(async () => {
     for(let i = 0; i < 100; i++) {
       var arr = [];
-      // await new Promise((resolve, reject) => {
-        for(var j=0; j< 1000; j++) {
-          var userData = {
-            username: faker.internet.userName(),
-            display_name: faker.name.firstName(),
-            photo_url: faker.image.imageUrl(),
-            profile_url: faker.image.imageUrl(),
-          }
-          arr.push(userData);
+      for(var j=0; j< 100000; j++) {
+        var userData = {
+          username: faker.internet.userName(),
+          display_name: faker.name.firstName(),
+          photo_url: faker.image.imageUrl(),
+          profile_url: faker.image.imageUrl(),
         }
-        var now = new Date();
-        console.log('before waiting: ', now)
-        await User.bulkCreate(arr);
-        console.log('time passed: ', new Date() - now)
-        console.log(i);
-        // resolve();
-      // })
+        arr.push(userData);
+      }
+      var now = new Date();
+      console.log('before waiting: ', now)
+      await User.bulkCreate(arr);
+      console.log('time passed: ', new Date() - now)
+      console.log(i);
       var end = Date.now();
       console.log((end-start)/1000);
     }
@@ -34,24 +31,22 @@ User.sync({force:true})
     console.error(err);
   });
 
+  var  start = Date.now();
   Listings.sync({force:true})
     .then(async () => {
       for(let i = 0; i < 100; i++) {
         var arr = [];
-        // await new Promise((resolve, reject) => {
-          for(var j=0; j< 1000; j++) {
-            var userData = {
-              address: faker.address.streetName(),
-            }
-            arr.push(userData);
+        for(var j=0; j< 100000; j++) {
+          var userData = {
+            username: faker.address.streetAddress(),
           }
-          var now = new Date();
-          console.log('before waiting: ', now)
-          await Listings.bulkCreate(arr);
-          console.log('time passed: ', new Date() - now)
-          console.log(i);
-          // resolve();
-        // })
+          arr.push(userData);
+        }
+        var now = new Date();
+        console.log('before waiting: ', now)
+        await Listings.bulkCreate(arr);
+        console.log('time passed: ', new Date() - now)
+        console.log(i);
         var end = Date.now();
         console.log((end-start)/1000);
       }
@@ -61,97 +56,35 @@ User.sync({force:true})
     });
 
 
-
-
+var  start = Date.now();
 Reviews.sync({force:true})
   .then(async () => {
     for(let i = 0; i < 100; i++) {
-      var reviewArr = [], userArr = [], listingsArr = [];
-      // await new Promise((resolve, reject) => {
-        for(var j=0; j< 1000; j++) {
-          var reviewData = {
-            review_date: faker.date.past(),
-            reviews: faker.lorem.paragraph(),
-            accuracy: Math.floor((Math.random()) *5),
-            communication: Math.floor((Math.random()) *5),
-            cleanliness: Math.floor((Math.random()) *5),
-            location: Math.floor((Math.random()) *5),
-            check_in: Math.floor((Math.random())*5),
-            value: Math.floor((Math.random()) * 5),
-            listings_id: ((Math.random() ) * 1000 + i + j),
-            user_id: ((Math.random() ) * 1000 + i + j),
-          }
-
-          // userArr.push(userData);
-          // listingsArr.push(listingData);
-        reviewArr.push(reviewData);
+      var arr = [];
+      for(var j=0; j< 100000; j++) {
+        var userData = {
+          review_date: faker.date.past(),
+          review: faker.lorem.paragraph(),
+          accuracy: Math.floor((Math.random()) *5),
+          communication: Math.floor((Math.random()) *5),
+          cleanliness: Math.floor((Math.random()) *5),
+          location: Math.floor((Math.random()) *5),
+          check_in: Math.floor((Math.random())*5),
+          value: Math.floor((Math.random()) * 5),
+          listings_id: ((Math.random() + 1) * 1000),
+          user_id: ((Math.random() + 1) * 1000),
         }
-        var now = new Date();
-        console.log('before waiting: ', now)
-        await Reviews.bulkCreate(reviewArr);
-        // User.bulkCreate(userArr);
-        // Listings.bulkCreate(listingsArr);
-        console.log('time passed: ', new Date() - now)
-        console.log(i);
-        // resolve();
-      // })
+        arr.push(userData);
+      }
+      var now = new Date();
+      console.log('before waiting: ', now)
+      await Reviews.bulkCreate(arr);
+      console.log('time passed: ', new Date() - now)
+      console.log(i);
       var end = Date.now();
-      console.log('Time taken to Populate data: ', (end-start)/1000);
+      console.log((end-start)/1000);
     }
   })
   .catch((err) => {
     console.error(err);
   });
-
-
-
-
-  // var  start = Date.now();
-  // Reviews.sync({force:true})
-  //   .then(async () => {
-  //     for(let i = 0; i < 100; i++) {
-  //       var reviewArr = [], userArr = [], listingsArr = [];
-  //       await new Promise((resolve, reject) => {
-  //         for(var j=0; j< 100; j++) {
-  //           var listingData = {
-  //             address: faker.address.streetAddress(),
-  //           }
-  //           var userData = {
-  //             username: faker.internet.userName(),
-  //             display_name: faker.name.firstName(),
-  //             photo_url: faker.image.imageUrl(),
-  //             profile_url: faker.image.imageUrl(),
-  //           }
-  //           var reviewData = {
-  //             review_date: faker.date.past(),
-  //             reviews: faker.lorem.paragraph(),
-  //             accuracy: Math.floor((Math.random()) *5),
-  //             communication: Math.floor((Math.random()) *5),
-  //             cleanliness: Math.floor((Math.random()) *5),
-  //             location: Math.floor((Math.random()) *5),
-  //             check_in: Math.floor((Math.random())*5),
-  //             value: Math.floor((Math.random()) * 5),
-  //             listings_id: ((Math.random() + 1) * 1000),
-  //             user_id: ((Math.random() + 1) * 1000),
-  //           }
-  
-  //           userArr.push(userData);
-  //           listingsArr.push(listingData);
-  //           reviewArr.push(reviewData);
-  //         }
-  //         var now = new Date();
-  //         console.log('before waiting: ', now)
-  //         Reviews.bulkCreate(reviewArr);
-  //         User.bulkCreate(userArr);
-  //         Listings.bulkCreate(listingsArr);
-  //         console.log('time passed: ', new Date() - now)
-  //         console.log(i);
-  //         resolve();
-  //       })
-  //       var end = Date.now();
-  //       console.log((end-start)/1000);
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     console.error(err);
-  //   });

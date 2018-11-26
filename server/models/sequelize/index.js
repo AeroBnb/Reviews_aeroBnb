@@ -109,17 +109,17 @@ module.exports = {
       }
     });
 
-    // Users
-    // .build(user)
-    // .save()
-    // .then((response, error) => {
-    //   if (error) {
-    //     console.error(error);
-    //   } else {
-    //     callback(response);
-    //     console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
-    //   }
-    // });
+    Users
+    .build(user)
+    .save()
+    .then((response, error) => {
+      if (error) {
+        console.error(error);
+      } else {
+        callback(response);
+        console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
+      }
+    });
 
   },
 

@@ -12,9 +12,9 @@
       - function: "generateRandomID"
       - get:
           url: "/reviews?id={{id}}"
-        # - post:
-        #     url: "/bookinglisting"
-        #     json:
-        #       price: 999
-        #       maxguests: 4
-        #       minstay: 5
+      # - post:
+      #     url: "/reviews?id={{id}}"
+      #     json:
+      #       price: 999
+      #       maxguests: 4
+      #       minstay: 5

@@ -7,29 +7,23 @@ const seqController = require('./controller/sequelize/controller.js');
 
 const router = express.Router();
 
-<<<<<<< HEAD
 //-------MongoDB Controller-----------
 
-=======
->>>>>>> 7ec0ce6d28ec916820f400dc4cda4e9e3b2e9888
-// router.get('/reviews', controller.getAllReviews);
-// router.get('/ratings', controller.getRatings);
-// router.get('/search', controller.search);
-// router.post('/reviews', controller.postReviews);
-// router.put('/reviews', controller.updateReviews);
-// router.delete('/reviews', controller.deleteReviews);
-<<<<<<< HEAD
+router.get('/reviews', controller.getAllReviews);
+router.get('/ratings', controller.getRatings);
+router.get('/search', controller.search);
+router.post('/reviews', controller.postReviews);
+router.put('/reviews', controller.updateReviews);
+router.delete('/reviews', controller.deleteReviews);
 
 //--------Sequelize Controller ---------
-=======
->>>>>>> 7ec0ce6d28ec916820f400dc4cda4e9e3b2e9888
 
-router.get('/reviews', seqController.getAllReviews);
-router.get('/ratings', seqController.getRatings);
-router.get('/search', seqController.search);
-router.post('/reviews', seqController.postReviews);
-router.put('/reviews', seqController.updateReviews);
-router.delete('/reviews', seqController.deleteReviews);
+// router.get('/reviews', seqController.getAllReviews);
+// router.get('/ratings', seqController.getRatings);
+// router.get('/search', seqController.search);
+// router.post('/reviews', seqController.postReviews);
+// router.put('/reviews', seqController.updateReviews);
+// router.delete('/reviews', seqController.deleteReviews);
 
 //--------- MySQl controller ----------
 // router.get('/reviews', mySqlController.getAllReviews);
@@ -41,12 +35,12 @@ router.delete('/reviews', seqController.deleteReviews);
 
 //------------------- Knex Controller -----------------
 
-router.get('/reviews', knexController.getAllReviews);
-router.get('/ratings', knexController.getRatings);
-router.get('/search', knexController.search);
-router.post('/reviews', knexController.postReviews);
-router.put('/reviews', knexController.updateReviews);
-router.delete('/reviews', knexController.deleteReviews);
+// router.get('/reviews', knexController.getAllReviews);
+// router.get('/ratings', knexController.getRatings);
+// router.get('/search', knexController.search);
+// router.post('/reviews', knexController.postReviews);
+// router.put('/reviews', knexController.updateReviews);
+// router.delete('/reviews', knexController.deleteReviews);
 
 // Changes made
 

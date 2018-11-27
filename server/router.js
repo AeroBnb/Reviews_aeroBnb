@@ -9,12 +9,12 @@ const router = express.Router();
 
 //-------MongoDB Controller-----------
 
-router.get('/reviews', controller.getAllReviews);
-router.get('/ratings', controller.getRatings);
-router.get('/search', controller.search);
-router.post('/reviews', controller.postReviews);
-router.put('/reviews', controller.updateReviews);
-router.delete('/reviews', controller.deleteReviews);
+// router.get('/reviews', controller.getAllReviews);
+// router.get('/ratings', controller.getRatings);
+// router.get('/search', controller.search);
+// router.post('/reviews', controller.postReviews);
+// router.put('/reviews', controller.updateReviews);
+// router.delete('/reviews', controller.deleteReviews);
 
 //--------Sequelize Controller ---------
 
@@ -35,12 +35,12 @@ router.delete('/reviews', controller.deleteReviews);
 
 //------------------- Knex Controller -----------------
 
-// router.get('/reviews', knexController.getAllReviews);
-// router.get('/ratings', knexController.getRatings);
-// router.get('/search', knexController.search);
-// router.post('/reviews', knexController.postReviews);
-// router.put('/reviews', knexController.updateReviews);
-// router.delete('/reviews', knexController.deleteReviews);
+router.get('/reviews', knexController.getAllReviews);
+router.get('/ratings', knexController.getRatings);
+router.get('/search', knexController.search);
+router.post('/reviews', knexController.postReviews);
+router.put('/reviews', knexController.updateReviews);
+router.delete('/reviews', knexController.deleteReviews);
 
 // Changes made
 

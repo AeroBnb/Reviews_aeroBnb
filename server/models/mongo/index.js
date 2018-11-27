@@ -14,7 +14,7 @@ module.exports = {
           console.log('error: ', err);
         } else {
           var reviews = Object.values(data.reviews);
-          console.log(reviews);
+          // console.log(reviews);
           callback(reviews);
           console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
         }

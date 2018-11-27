@@ -8,6 +8,7 @@ module.exports = {
   },
 
   getRatings: (req, res) => {
+    console.log('I am in rating controller');
     getRatings(req.query.id, (response) => {
       res.send(response);
     });

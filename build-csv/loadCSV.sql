@@ -10,7 +10,7 @@ COPY users
 FROM '/Users/indu/Documents/Galvanize/HRNYC18/SDC_Project/Reviews_aeroBnb/build-csv/users.csv' 
 WITH (HEADER false, DELIMITER E'\t');
 
-ALTER DATABASE SDC SET search_path = SDC, public;
+ALTER DATABASE sdcknex SET search_path = sdcknex, public;
 
 ALTER SEQUENCE reviews_r_id_seq 
 RESTART WITH 10000001;

@@ -69,7 +69,9 @@ export default class Reviews extends React.Component {
 
   getRatings() {
     let queryString = window.location.search;
+    console.log(queryString);
     let listingID = (queryString.slice(-3) * 1);
+    console.log(listingID);
     let params = {
       params: {
         id: listingID,
@@ -78,6 +80,7 @@ export default class Reviews extends React.Component {
     
     axios.get('/ratings', params)
     .then((result) => {
+      console.log(result.data);
       if (result.data[0].accuracy !== null) {
         this.setState({
           ratings: result.data

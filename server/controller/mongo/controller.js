@@ -2,7 +2,6 @@ const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteRev
 
 module.exports = {
   getAllReviews: (req, res) => {
-    // var id = Number(req.query);
     console.log(req.query);
     getAllReviews(req.query.id, (response) => {
       res.send(response);

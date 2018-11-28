@@ -12,3 +12,4 @@ package-lock.json
 many.json
 *.csv
 *.json
+newrelic_agent.log

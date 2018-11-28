@@ -15,7 +15,7 @@ module.exports = {
     FROM Reviews
     LEFT JOIN Users
     ON Reviews.user_id = Users.id
-    WHERE Reviews.listings_id = 10000
+    WHERE Reviews.listings_id = ${listingId}
     ORDER BY Reviews.review_date DESC LIMIT 10;
     `).then((result, error) => {
       if(error) console.error(error);

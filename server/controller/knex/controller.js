@@ -2,13 +2,14 @@ const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteRev
 
 module.exports = {
   getAllReviews: (req, res) => {
+    console.log(req.query);
     getAllReviews(req.query.id, (response) => {
       res.send(response);
     });
   },
 
   getRatings: (req, res) => {
-    console.log('I am in rating controller');
+    console.log('I am in rating controller', req.query);
     getRatings(req.query.id, (response) => {
       res.send(response);
     });

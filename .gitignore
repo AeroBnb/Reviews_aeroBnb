@@ -10,6 +10,5 @@ Notes
 .eslintrc.js
 package-lock.json
 many.json
-listings.csv
-user.csv
-reviews.csv
+*.csv
+*.json

@@ -4,7 +4,7 @@ const start = Date.now();
 
 module.exports = {
   getAllReviews: (listingId, callback) => {
-    console.log("Hello");
+    // console.log("Hello");
     // knex.select().from('reviews').where({r_id: 1})
     // .then(result => {
 		// 	console.log('ia ma in the knex connection ', result);
@@ -15,8 +15,8 @@ module.exports = {
     FROM Reviews
     LEFT JOIN Users
     ON Reviews.user_id = Users.id
-    WHERE Reviews.listings_id = ${listingId}
-    ORDER BY Reviews.review_date DESC;
+    WHERE Reviews.listings_id = 10000
+    ORDER BY Reviews.review_date DESC LIMIT 10;
     `).then((result, error) => {
       if(error) console.error(error);
       callback(result.rows);
@@ -37,7 +37,14 @@ module.exports = {
       if (error) {
         console.error(error);
       } else {
-        callback(response.rows);
+        var obj = {}
+        obj.accuracy = Number(response.rows[0].accuracy);
+        obj.communication = Number(response.rows[0].communication);
+        obj.cleanliness = Number(response.rows[0].cleanliness);
+        obj.location = Number(response.rows[0].location);
+        obj.checkin = Number(response.rows[0].checkin);
+        obj.value = Number(response.rows[0].value);
+        callback([obj]);
         console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
       }
     });

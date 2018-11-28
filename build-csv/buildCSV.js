@@ -40,8 +40,8 @@ const createReviews = (num) => {
   let arrayOfReviews = [];
   
   for (i = 0; i < num; i++) {
-    let listingId = Math.floor((Math.random()) * 100) + i;
-    let userId = Math.floor((Math.random()) * 100) + i;
+    let listingId = Math.ceil((Math.random()) * 100000);
+    let userId = Math.ceil((Math.random()) * 100000);
     // if (!bookingIdHash.hasOwnProperty(listingId)) {
     //   bookingIdHash[listingId] = true;
     // } else {
@@ -62,7 +62,7 @@ const createReviews = (num) => {
 const startReviews = moment();
 let writeAllReviews = () => {
   return new Promise((resolve) => {
-    writeToStream(reviewsStream, createReviews, 20);
+    writeToStream(reviewsStream, createReviews, 20000);
     reviewsStream.on('finish', () => {
       resolve();
     })
@@ -86,7 +86,7 @@ const createListings = (num) => {
 }
 let writeAllListings = () => {
   return new Promise((resolve) => {
-    writeToStream(listingsStream, createListings, 20);
+    writeToStream(listingsStream, createListings, 20000);
     listingsStream.on('finish', () => {
       resolve();
     })
@@ -111,7 +111,7 @@ const createUsers = (num) => {
 }
 let writeAllUsers = () => {
   return new Promise((resolve) => {
-    writeToStream(usersStream, createUsers, 20);
+    writeToStream(usersStream, createUsers, 20000);
     usersStream.on('finish', () => {
       resolve();
     })

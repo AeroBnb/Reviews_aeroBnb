@@ -17,14 +17,13 @@ const Sequelize = require('sequelize');
 // 	logging: false
 // });
 
-const db = new Sequelize('postgres://localhost:5432/SDCupdated', {
+const db = new Sequelize('postgres://localhost:5432/sdcknex', {
   logging: false
 })
 
 // const db = new Sequelize('postgres://indu:manindu2007@example.com/SDCupdated', {
 //   logging: false
 // })
-
 
 db.authenticate()
 	.then(() => {
@@ -33,7 +32,6 @@ db.authenticate()
 	.catch((err) => {
 		console.error('Failed to connect to the database', err);
 	})
-
 
 
 module.exports = {db};

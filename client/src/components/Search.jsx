@@ -6,10 +6,10 @@ export default class Search extends React.Component {
     super(props);
     this.state = {
       query: '',
-      starsLoaded: false,
-      avgRating: 0,
-      ratingsLoaded: false,
-      totalRatings: 0
+      starsLoaded: this.props.starsLoaded || false,
+      avgRating: this.props.avgRating || 0,
+      ratingsLoaded: this.props.ratingsLoaded || false,
+      totalRatings: this.props.totalRatings || 0
     }
     this.searchQuery = this.searchQuery.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
@@ -18,6 +18,7 @@ export default class Search extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("I am called");
     if (this.props.ratings !== prevProps.ratings) {
       this.starsLoaded(this.props.ratings);
     }
@@ -43,7 +44,7 @@ export default class Search extends React.Component {
       ratingsLoaded: true,
       totalRatings: reviews.length
     });
-  }
+  };
 
   searchQuery(event) {
     this.setState({

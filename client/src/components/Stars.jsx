@@ -4,6 +4,7 @@ import StarsModel from './StarsModel.jsx';
 export default class Stars extends React.Component {
   constructor(props) {
     super(props);
+    console.log('In stars: ', this.props);
     this.state = {
       isLoaded: true,
       ratings: this.props.ratings

@@ -5,6 +5,7 @@ npm
 npm-debug.log
 node_modules
 client/dist/bundle.js
+client/dist/bundle-server.js
 config.json
 Notes
 .eslintrc.js

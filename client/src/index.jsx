@@ -6,13 +6,13 @@ import Search from './components/Search.jsx';
 import Stars from './components/Stars.jsx';
 import ReviewList from './components/ReviewList.jsx';
 
-export default class Reviews extends React.Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: [],
+      reviews: props.reviews || [],
       search: [],
-      ratings: [],
+      ratings: props.ratings || [],
       showSearch: false
     }
     this.getAllReviews = this.getAllReviews.bind(this);
@@ -100,5 +100,5 @@ export default class Reviews extends React.Component {
   }
 };
 
-window.Reviews = Reviews;
-//ReactDOM.render(<Reviews />, document.getElementById("reviews"));
+window.Reviews = App;
+//ReactDOM.render(<App />, document.getElementById("reviews"));

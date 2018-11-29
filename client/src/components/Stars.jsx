@@ -5,8 +5,8 @@ export default class Stars extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoaded: false,
-      ratings: []
+      isLoaded: true,
+      ratings: this.props.ratings
     }
     this.ratingsLoaded = this.ratingsLoaded.bind(this);
   }

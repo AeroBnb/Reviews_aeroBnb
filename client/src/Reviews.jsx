@@ -1,17 +1,21 @@
 import React from 'react';
 import axios from 'axios';
 
+import Search from './components/Search.jsx';
+import Stars from './components/Stars.jsx';
+import ReviewList from './components/ReviewList.jsx';
+
 class Reviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: props.reviews || [],
+      reviews: this.props.reviews || [],
       search: [],
-      ratings: props.ratings || [],
+      ratings: this.props.ratings || [],
       showSearch: false
     }
   }
-  
+
   render() {
     return (
       <div>
@@ -22,3 +26,5 @@ class Reviews extends React.Component {
     )
   }
 }
+
+export default Reviews;

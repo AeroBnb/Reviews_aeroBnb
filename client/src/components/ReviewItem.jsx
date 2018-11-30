@@ -2,6 +2,7 @@ import React from 'react';
 
 export default class ReviewItem extends React.Component {
   constructor(props) {
+    console.log(props);
     super(props);
     this.state = {
       truncate: this.props.review.reviews.length > 280 ? true : false,

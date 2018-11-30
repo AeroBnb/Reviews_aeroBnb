@@ -1,15 +1,22 @@
-const pg = require('pg');
+const { Pool } = require('pg');
 // const config = require('../config.js');
 
-const knex = require('knex')({
-    client: 'pg',
-    connection: {
-        host: 'localhost',
-        database: 'sdcknex',
-        // user: config.username,
-        // password: config.password,
-    }
-});
+const knex = new Pool({
+  host: 'localhost',
+  database:'sdcknex'
+})
+
+knex.connect();
+
+// const knex = require('knex')({
+//     client: 'pg',
+//     connection: {
+//         host: 'localhost',
+//         database: 'sdcknex',
+//         // user: config.username,
+//         // password: config.password,
+//     }
+// });
 
 // knex.raw(`SELECT *
 // FROM Reviews

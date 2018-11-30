@@ -1,15 +1,12 @@
 meow.pem
 .DS_Store
-config.js
 npm
 npm-debug.log
 node_modules
 client/dist/bundle.js
 client/dist/bundle-server.js
-config.json
 Notes
 .eslintrc.js
-package-lock.json
 many.json
 *.csv
-newrelic_agent.log
+npm-debug.log

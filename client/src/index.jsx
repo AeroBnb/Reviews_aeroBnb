@@ -10,20 +10,21 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: props.reviews || [],
+      reviews: this.props.reviews || [],
       search: [],
-      ratings: props.ratings || [],
+      ratings: this.props.ratings || [],
       showSearch: false
     }
+    console.log('browser props', this.props);
     this.getAllReviews = this.getAllReviews.bind(this);
     this.searchReviews = this.searchReviews.bind(this);
     this.getRatings = this.getRatings.bind(this);
   }
 
-  componentDidMount() {
-    this.getAllReviews();
-    this.getRatings();
-  }
+  // componentDidMount() {
+  //   this.getAllReviews();
+  //   this.getRatings();
+  // }
 
   getAllReviews() {
     let queryString = window.location.search;
@@ -92,7 +93,8 @@ export default class App extends React.Component {
   render() {
     return (
       <div>
-        <Search searchReviews={this.searchReviews} ratings={this.state.ratings} reviews={this.state.reviews}/>
+        {/* <Search searchReviews={this.searchReviews} ratings={this.state.ratings} reviews={this.state.reviews}/> */}
+        <Search searchReviews={this.searchReviews} ratings={this.state.ratings} reviews={this.state.reviews} totalRatings={this.props.totalRatings} ratingsLoaded={this.props.ratingsLoaded} starsLoaded={this.props.starsLoaded} avgRating={this.props.avgRating}/>
         <Stars ratings={this.state.ratings}/>
         <ReviewList reviews={this.state.showSearch ? this.state.search : this.state.reviews}/>
       </div>

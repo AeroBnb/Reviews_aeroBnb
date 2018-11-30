@@ -8,7 +8,6 @@ import ReviewList from './components/ReviewList.jsx';
 class Reviews extends React.Component {
   constructor(props) {
     super(props);
-    console.log('In reviews', this.props);
     this.state = {
       reviews: this.props.reviews || [],
       search: [],
@@ -45,10 +44,9 @@ class Reviews extends React.Component {
 
 
   render() {
-    console.log('Checking the state: ', this.state.ratings);
     return (
       <div>
-        <Search searchReviews={this.searchReviews} ratings={this.state.ratings} reviews={this.state.reviews} totalRatings={this.props.totalRatings} ratingsLoaded={this.props.ratingsLoaded} startsLoaded={this.props.startsLoaded} avgRating={this.props.avgRating}/>
+        <Search searchReviews={this.searchReviews} ratings={this.state.ratings} reviews={this.state.reviews} totalRatings={this.props.totalRatings} ratingsLoaded={this.props.ratingsLoaded} starsLoaded={this.props.starsLoaded} avgRating={this.props.avgRating}/>
         <Stars ratings={this.state.ratings}/>
         <ReviewList reviews={this.state.showSearch ? this.state.search : this.state.reviews}/>
       </div>

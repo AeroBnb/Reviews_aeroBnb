@@ -17,15 +17,15 @@ export default class Search extends React.Component {
     this.reviewsLoaded = this.reviewsLoaded.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log("I am called");
-    if (this.props.ratings !== prevProps.ratings) {
-      this.starsLoaded(this.props.ratings);
-    }
-    if (this.props.reviews !== prevProps.reviews) {
-      this.reviewsLoaded(this.props.reviews);
-    }
-  }
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   console.log("I am called");
+  //   if (this.props.ratings !== prevProps.ratings) {
+  //     this.starsLoaded(this.props.ratings);
+  //   }
+  //   if (this.props.reviews !== prevProps.reviews) {
+  //     this.reviewsLoaded(this.props.reviews);
+  //   }
+  // }
 
   starsLoaded(ratings) {
     let sum = 0;

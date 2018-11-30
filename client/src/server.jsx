@@ -8,9 +8,9 @@ class App extends React.Component {
 
   render () {
     return (
-      <div>
+      <React.Fragment>
         <Reviews reviews={this.props.reviews} ratings={this.props.ratings} ratingsLoaded={this.props.ratingsLoaded} totalRatings={this.props.totalRatings} starsLoaded={this.props.starsLoaded} avgRating={this.props.avgRating}/>
-      </div>
+      </React.Fragment>
     )
   }
 }

@@ -12,13 +12,13 @@ export default class ReviewItem extends React.Component {
     this.showAlert = this.showAlert.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.review.reviews.length > 280) {
-      this.setState({
-        truncate: true
-      });
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.review.reviews.length > 280) {
+  //     this.setState({
+  //       truncate: true
+  //     });
+  //   }
+  // }
 
   clickHandler(event) {
     event.preventDefault();

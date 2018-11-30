@@ -4,18 +4,19 @@ import StarsModel from './StarsModel.jsx';
 export default class Stars extends React.Component {
   constructor(props) {
     super(props);
+    // console.log('In stars: ', this.props);
     this.state = {
-      isLoaded: false,
-      ratings: []
+      isLoaded: true,
+      ratings: this.props.ratings
     }
     this.ratingsLoaded = this.ratingsLoaded.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (this.props.ratings !== prevProps.ratings) {
-      this.ratingsLoaded(this.props.ratings);
-    }
-  }
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   if (this.props.ratings !== prevProps.ratings) {
+  //     this.ratingsLoaded(this.props.ratings);
+  //   }
+  // }
 
   ratingsLoaded(ratings) {
     this.setState({
@@ -49,7 +50,7 @@ export default class Stars extends React.Component {
           </div>
           <div>
             <span className="floatLeft50">Check-in</span>
-            <span className="floatRight50"><StarsModel rating={this.state.isLoaded ? this.state.ratings[0].checkin : 0} dimensions='15px' /></span>
+            <span className="floatRight50"><StarsModel rating={this.state.isLoaded ? this.state.ratings[0].check_in : 0} dimensions='15px' /></span>
           </div>
           <div>
             <span className="floatLeft50">Value</span>

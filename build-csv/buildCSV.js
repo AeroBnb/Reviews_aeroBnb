@@ -40,8 +40,8 @@ const createReviews = (num) => {
   let arrayOfReviews = [];
   
   for (i = 0; i < num; i++) {
-    let listingId = Math.ceil((Math.random()) * 100000);
-    let userId = Math.ceil((Math.random()) * 100000);
+    let listingId = Math.ceil((Math.random()) * (10000000-1) +1);
+    let userId = Math.ceil((Math.random()) * (10000000-1)+1);
     // if (!bookingIdHash.hasOwnProperty(listingId)) {
     //   bookingIdHash[listingId] = true;
     // } else {
@@ -52,9 +52,9 @@ const createReviews = (num) => {
     // }
     arrayOfReviews.push(`${reviewIdTracker}\t${listingId}\t${userId}\t${randomDate()}` + 
       `\t${faker.lorem.paragraphs(Math.ceil(Math.random() * 2)).replace(/\n/g, '\\n').replace(/\r/g, '\\r')}` + 
-      `\t${Math.ceil(Math.random() * 5)}\t${Math.ceil(Math.random() * 5)}` +
-      `\t${Math.ceil(Math.random() * 5)}\t${Math.ceil(Math.random() * 5)}` + 
-      `\t${Math.ceil(Math.random() * 5)}\t${Math.ceil(Math.random() * 5)}`);
+      `\t${Math.ceil(Math.random() * (5-1) + 1)}\t${Math.ceil(Math.random() * (5-1) + 1)}` +
+      `\t${Math.ceil(Math.random() * (5-1) + 1)}\t${Math.ceil(Math.random() * (5-1) + 1)}` + 
+      `\t${Math.ceil(Math.random() * (5-1) + 1)}\t${Math.ceil(Math.random() * (5-1) + 1)}`);
       reviewIdTracker++;
   }
   return arrayOfReviews;

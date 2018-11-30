@@ -5,7 +5,20 @@ const knexController = require('./controller/knex/controller.js');
 const controller = require('./controller/mongo/controller.js');
 const seqController = require('./controller/sequelize/controller.js');
 
+const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteReviews} = require('./models/mongo/index.js');
+// const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteReviews} = require('./models/knex/model.js');
+
+const React = require('react');
+const ReactDOM = require('react-dom/server');
+const axios = require('axios');
+const fs = require('fs');
+const fetch = require('fetch');
+const Bundle = require('../client/dist/bundle-server.js').default;
+
+
 const router = express.Router();
+
+
 
 //-------MongoDB Controller-----------
 
@@ -43,6 +56,92 @@ router.put('/reviews', knexController.updateReviews);
 router.delete('/reviews', knexController.deleteReviews);
 
 // Changes made
+
+
+function starsLoaded(ratings) {
+  let sum = 0;
+  for (var key in ratings[0]) {
+    sum += ratings[0][key]
+  }
+  let avg = sum / 6;
+  return { starsLoaded: true, avgRating: avg }
+}
+
+function reviewsLoaded(reviews) {
+  return { ratingsLoaded: true, totalRatings: reviews.length }
+};
+
+
+const ssr = (listingID) => {
+  var props = {};
+  return new Promise((resolve, reject) => {
+    getAllReviews(listingID, (data) => {
+      console.log('Reviews: ', data);
+      props.reviews = data;
+      getRatings(listingID, (result) => {
+        console.log('Ratings: ', result);
+        props.ratings = result;
+        var avgObj = starsLoaded(props.ratings);
+        var totalRatingsObj = reviewsLoaded(props.reviews);
+        props.ratingsLoaded = totalRatingsObj.ratingsLoaded;
+        props.totalRatings = totalRatingsObj.totalRatings;
+        props.starsLoaded = avgObj.starsLoaded;
+        props.avgRating = avgObj.avgRating;
+        let component = React.createElement(Bundle, props);
+        let App = ReactDOM.renderToString(component);
+        resolve([App, JSON.stringify(props)]);
+      })
+  });
+  
+  })
+
+}
+
+// -------- Server Side Rendering for client side  -------- //
+router.get('/listing', function htmlTemplate(req, res) {
+  console.log('I am in the /listing of router');
+  ssr(req.query.id)
+    .then((results) => {
+      res.end(`<!DOCTYPE html>
+      <html>
+      <head>
+        <title>Reviews</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+      </head>
+      <body>
+        <div id="reviews">${results[0]}</div>
+        <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <script type="text/javascript" src="/bundle.js"></script>
+        <script>
+          ReactDOM.hydrate(
+            React.createElement(Reviews, ${results[1]}),
+            document.getElementById('reviews')
+          );
+        </script>
+      </body>
+      </html>
+    `)
+    })
+});
+
+
+//--------- Server Side Rendering for Proxy ----------- //
+
+
+router.get('/renderReviews', (req, res) => {
+  console.log('I am in the Proxy Get')
+	ssr(req.query.id)
+		.then((results) => {
+			res.send(results);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.status(500).send();
+		});
+});
+
 
 router.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/../client/dist/index.html'));

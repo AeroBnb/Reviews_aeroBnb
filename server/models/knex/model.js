@@ -9,19 +9,20 @@ module.exports = {
     // .then(result => {
 		// 	console.log('ia ma in the knex connection ', result);
 
-		// });
+    // });
+    
 
-    knex.raw(`SELECT *
-    FROM Reviews
-    LEFT JOIN Users
-    ON Reviews.user_id = Users.id
-    WHERE Reviews.listings_id = 10000
-    ORDER BY Reviews.review_date DESC LIMIT 10;
-    `).then((result, error) => {
-      if(error) console.error(error);
-      callback(result.rows);
-      console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
-    })
+    knex.query(`SELECT *
+      FROM Reviews
+      LEFT  JOIN Users
+      ON Reviews.user_id = Users.id
+      WHERE Reviews.listings_id = ${listingId}
+      ORDER BY Reviews.review_date DESC LIMIT 10;
+      `).then((result, error) => {
+        if(error) console.error(error);
+        callback(result.rows);
+        console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
+      })
   },
 
   getRatings: (listingID, callback) => {
@@ -32,7 +33,7 @@ module.exports = {
     ON Reviews.user_id = Users.id
     WHERE Reviews.listings_id = ${listingID};`;
     var start = Date.now();
-    knex.raw(SQLquery)
+    knex.query(SQLquery)
     .then ((response, error) => {
       if (error) {
         console.error(error);
@@ -51,7 +52,7 @@ module.exports = {
   },
 
   search: (listingId, query) => {  // NOT WORKING
-    return knex.raw(`SELECT *
+    return knex.query(`SELECT *
       FROM reviews
       INNER JOIN Bookings
       ON 
@@ -136,14 +137,14 @@ module.exports = {
   },
 
   updateReviews: (reviewId, newReviewText, callback) => { // update
-    return knex.raw(`
+    return knex.query(`
       UPDATE reviews SET review_text = ?
       WHERE r_id = ?;
     `, [newReviewText, reviewId]);
   },
 
   deleteReviews: (reviewId, callback) => { // update
-    return knex.raw(`DELETE FROM reviews 
+    return knex.query(`DELETE FROM reviews 
       WHERE r_id = ?
     `, [reviewId]);
   }

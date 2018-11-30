@@ -2,9 +2,10 @@ import React from 'react';
 
 export default class ReviewItem extends React.Component {
   constructor(props) {
+    console.log(props);
     super(props);
     this.state = {
-      truncate: false,
+      truncate: this.props.review.reviews.length > 280 ? true : false,
       shortText: this.props.review.reviews.substring(0, 280) + '...',
       reviewText: this.props.review.reviews
     }
@@ -12,13 +13,13 @@ export default class ReviewItem extends React.Component {
     this.showAlert = this.showAlert.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.review.reviews.length > 280) {
-      this.setState({
-        truncate: true
-      });
-    }
-  }
+  // componentDidMount() {
+  //   if (this.props.review.reviews.length > 280) {
+  //     this.setState({
+  //       truncate: true
+  //     });
+  //   }
+  // }
 
   clickHandler(event) {
     event.preventDefault();

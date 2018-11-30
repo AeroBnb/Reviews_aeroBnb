@@ -40,8 +40,8 @@ const createReviews = (num) => {
   let arrayOfReviews = [];
   
   for (i = 0; i < num; i++) {
-    let listingId = Math.ceil((Math.random()) * 100000);
-    let userId = Math.ceil((Math.random()) * 100000);
+    let listingId = Math.ceil((Math.random()) * 10000000);
+    let userId = Math.ceil((Math.random()) * 10000000);
     // if (!bookingIdHash.hasOwnProperty(listingId)) {
     //   bookingIdHash[listingId] = true;
     // } else {

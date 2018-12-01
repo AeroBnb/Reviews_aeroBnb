@@ -12,10 +12,10 @@ RUN npm install
 COPY . .
 
 # Make port 7000 available to the world outside this container
-EXPOSE 7000
+EXPOSE 7999
 
 # Define environment variable
 ENV NAME World
 
 # Run nmp run dev-start when the container launches
-CMD ["npm", "run", "server-dev" ]
+CMD ["npm", "start"]

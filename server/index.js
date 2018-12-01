@@ -4,9 +4,10 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const cors = require('cors');
 const router = require('./router.js');
-const {knex} = require('../database/postgres/index.js');
+const port = process.env.PORT || 3003;
+// const {knex} = require('../database/postgres/index.js');
 //const knex = require('../database/')
-const postgres = require('../database/sequelize/postgres.js')
+// const postgres = require('../database/sequelize/postgres.js')
 
 const app = express();
 const source = path.join(__dirname, '/../client/dist');
@@ -29,7 +30,7 @@ app.use(express.static(source));
 
 app.use('/', router);
 
-app.listen(7000, () => { console.log('Listening on port 7000'); });
+app.listen(port, '0.0.0.0', () => { console.log('Listening on port 7000'); });
 
 
 

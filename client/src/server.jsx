@@ -3,6 +3,7 @@ import Reviews from './Reviews.jsx'
 
 class App extends React.Component {
   constructor(props) {
+    // console.log('browser props', props);
     super(props);
   }
 

@@ -1,12 +1,6 @@
-meow.pem
-.DS_Store
-npm
-npm-debug.log
 node_modules
-client/dist/bundle.js
-client/dist/bundle-server.js
-Notes
-.eslintrc.js
-many.json
-*.csv
 npm-debug.log
+many.json
+**/*.csv
+**/*.pem
+

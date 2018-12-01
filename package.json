@@ -4,6 +4,7 @@
   "description": "Reviews module for Staybnb \"item description page\"",
   "main": "index.js",
   "scripts": {
+    "start": "NODE_ENV=production node server/index.js",
     "server-dev": "nodemon server/index.js",
     "react-dev": "webpack -d --watch",
     "seed-mongo": "node ./server/models/mongo/seed.js",
@@ -16,7 +17,7 @@
     "listpm2": "pm2 list",
     "pm2server": "pm2 show server",
     "pm2stop": "pm2 stop 0",
-    "connect": "chmod 400 meow.pem && ssh -i \"meow.pem\" ubuntu@ec2-18-218-27-164.us-east-2.compute.amazonaws.com"
+    "aws-connect-db": "chmod 400 aerobnb.pem && ssh -i \"aerobnb.pem\" ubuntu@ec2-50-112-34-117.us-west-2.compute.amazonaws.com"
   },
   "repository": {
     "type": "git",

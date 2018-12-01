@@ -8,6 +8,7 @@ import ReviewList from './components/ReviewList.jsx';
 class Reviews extends React.Component {
   constructor(props) {
     super(props);
+    // console.log('browser props', this.props);
     this.state = {
       reviews: this.props.reviews || [],
       search: [],

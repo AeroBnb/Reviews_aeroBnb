@@ -2,7 +2,6 @@ import React from 'react';
 
 export default class ReviewItem extends React.Component {
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       truncate: this.props.review.reviews.length > 280 ? true : false,
@@ -51,7 +50,7 @@ export default class ReviewItem extends React.Component {
           </span>
           <span className="reviewItemHeaderInfo">
             {this.props.review.display_name} <br />
-            {this.props.review.review_date.substring(0, 10)}
+            {this.props.review.review_date}
           </span>
           <span className="reviewItemHeaderFlag">
             <a href='/'><img src="http://imgur.com/8ELuIV8.png" className="reviewItemHeaderFlagImg" onClick={this.showAlert}/></a>

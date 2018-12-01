@@ -15,7 +15,6 @@ export default class App extends React.Component {
       ratings: this.props.ratings || [],
       showSearch: false
     }
-    console.log('browser props', this.props);
     this.getAllReviews = this.getAllReviews.bind(this);
     this.searchReviews = this.searchReviews.bind(this);
     this.getRatings = this.getRatings.bind(this);

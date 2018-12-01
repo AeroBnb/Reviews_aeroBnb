@@ -71,16 +71,45 @@ function reviewsLoaded(reviews) {
   return { ratingsLoaded: true, totalRatings: reviews.length }
 };
 
+function ratings(reviews) {
+  var communication = 0, accuracy = 0, cleanliness = 0, location = 0, check_in = 0, value = 0
+  var ratings = {}
+  reviews.forEach((review) => {
+    communication += review.communication;
+    accuracy += review.accuracy;
+    cleanliness += review.cleanliness;
+    location += review.location;
+    check_in += review.check_in;
+    value += review.value;
+  })
+  communication /=  reviews.length;
+  accuracy /=  reviews.length;
+  cleanliness /=  reviews.length;
+  location /=  reviews.length;
+  check_in /=  reviews.length;
+  value /=  reviews.length;
+  ratings.communication = communication;
+  ratings.accuracy = accuracy;
+  ratings.cleanliness = cleanliness;
+  ratings.location = location;
+  ratings.check_in = check_in;
+  ratings.value = value;
+  return ratings
+}
+
 
 const ssr = (listingID) => {
   var props = {};
   return new Promise((resolve, reject) => {
     getAllReviews(listingID, (data) => {
-      console.log('Reviews: ', data);
+      // console.log('Reviews: ', data);
       props.reviews = data;
-      getRatings(listingID, (result) => {
-        console.log('Ratings: ', result);
-        props.ratings = result;
+      review_date = data[0].review_date.toString().substring(0, 10);
+      props.reviews[0].review_date = review_date;
+      props.ratings = [ratings(props.reviews)];
+      // getRatings(listingID, (result) => {
+      //   console.log('Ratings: ', result);
+      //   props.ratings = result; 
         var avgObj = starsLoaded(props.ratings);
         var totalRatingsObj = reviewsLoaded(props.reviews);
         props.ratingsLoaded = totalRatingsObj.ratingsLoaded;
@@ -90,7 +119,7 @@ const ssr = (listingID) => {
         let component = React.createElement(Bundle, props);
         let App = ReactDOM.renderToString(component);
         resolve([App, JSON.stringify(props)]);
-      })
+      // })
   });
   
   })
@@ -134,6 +163,7 @@ router.get('/renderReviews', (req, res) => {
   console.log('I am in the Proxy Get')
 	ssr(req.query.id)
 		.then((results) => {
+      console.log(results);
 			res.send(results);
 		})
 		.catch((err) => {

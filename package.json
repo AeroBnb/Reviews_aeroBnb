@@ -21,11 +21,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Staybnb/Reviews.git"
+    "url": "https://github.com/AeroBnb/Reviews_aeroBnb"
   },
   "author": "Stacy Kim",
   "license": "MIT",
-  "homepage": "https://github.com/Staybnb/Reviews#readme",
+  "homepage": "https://github.com/AeroBnb/Reviews_aeroBnb#readme",
   "devDependencies": {
     "babel-core": "^6.23.3",
     "babel-loader": "^7.1.5",

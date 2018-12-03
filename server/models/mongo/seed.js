@@ -77,10 +77,10 @@ console.log(start);
 const getUserData = async function() {
   var count = 1;
   var listingsData = [];
-  for( let i = 0; i < 10000; i++) {
+  for( let i = 0; i < 10; i++) {
     var batch = '';
     await new Promise((resolve, reject) => {
-      for(let j = 0; j< 1000; j++) {
+      for(let j = 0; j< 2; j++) {
         var generatedReviews = reviewGenerator();
         var userData = {
           id: count,

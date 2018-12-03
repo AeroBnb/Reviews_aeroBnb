@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 
 # Make port 7000 available to the world outside this container
-EXPOSE 7999
+EXPOSE 80
 
 # Define environment variable
 ENV NAME World

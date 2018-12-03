@@ -5,8 +5,8 @@ const knexController = require('./controller/knex/controller.js');
 const controller = require('./controller/mongo/controller.js');
 const seqController = require('./controller/sequelize/controller.js');
 
-// const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteReviews} = require('./models/mongo/index.js');
-const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteReviews} = require('./models/knex/model.js');
+const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteReviews} = require('./models/mongo/index.js');
+// const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteReviews} = require('./models/knex/model.js');
 
 const React = require('react');
 const ReactDOM = require('react-dom/server');
@@ -164,7 +164,6 @@ router.get('/renderReviews', (req, res) => {
   console.log('I am in the Proxy Get')
 	ssr(req.query.id)
 		.then((results) => {
-      console.log(results);
 			res.send(results);
 		})
 		.catch((err) => {

@@ -11,7 +11,7 @@ module.exports = {
 
     // });
     
-
+    console.log('I am in the getAllReviews');
     knex.query(`SELECT *
       FROM Reviews
       LEFT  JOIN Users
@@ -22,6 +22,9 @@ module.exports = {
         if(error) console.error(error);
         callback(result.rows);
         console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
+      })
+      .catch((error) => {
+        console.log('I am in the error with no data: ', error);
       })
   },
 

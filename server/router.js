@@ -5,8 +5,8 @@ const knexController = require('./controller/knex/controller.js');
 const controller = require('./controller/mongo/controller.js');
 const seqController = require('./controller/sequelize/controller.js');
 
-const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteReviews} = require('./models/mongo/index.js');
-// const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteReviews} = require('./models/knex/model.js');
+// const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteReviews} = require('./models/mongo/index.js');
+const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteReviews} = require('./models/knex/model.js');
 
 const React = require('react');
 const ReactDOM = require('react-dom/server');
@@ -100,9 +100,9 @@ function ratings(reviews) {
 
 const ssr = (listingID) => {
   var props = {};
+  // console.log('I am in ssr');
   return new Promise((resolve, reject) => {
     getAllReviews(listingID, (data) => {
-      // console.log('Reviews: ', data);
       props.reviews = data;
       review_date = data[0].review_date.toString().substring(0, 10);
       props.reviews[0].review_date = review_date;
@@ -128,8 +128,9 @@ const ssr = (listingID) => {
 
 // -------- Server Side Rendering for client side  -------- //
 router.get('/listing', function htmlTemplate(req, res) {
-  console.log('I am in the /listing of router');
-  ssr(req.query.id)
+  var id =parseInt(req.query.id);
+  console.log(id);
+  ssr(id)
     .then((results) => {
       res.end(`<!DOCTYPE html>
       <html>

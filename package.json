@@ -17,7 +17,7 @@
     "listpm2": "pm2 list",
     "pm2server": "pm2 show server",
     "pm2stop": "pm2 stop 0",
-    "aws-connect-db": "chmod 400 aerobnb.pem && ssh -i \"aerobnb.pem\" ubuntu@ec2-50-112-34-117.us-west-2.compute.amazonaws.com"
+    "aws-connect-db": "chmod 400 aerobnb.pem && ssh -i \"aerobnb.pem\" ubuntu@ec2-34.213.207.173.us-west-2.compute.amazonaws.com"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,9 @@
 /* REMEMBER TO DELETE DROP DATABSE FROM SCHEMA.SQL WHEN EVERYTHING IS WORKING */
 const mysql = require('mysql');
-const config = require('../../config.json');
+const config = {
+  "user": "root", 
+  "database": "SDC"
+}
 
 const connection = mysql.createConnection(config);
 //const user = connection.user();

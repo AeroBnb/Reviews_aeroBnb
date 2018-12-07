@@ -11,6 +11,7 @@ Notes
 .eslintrc.js
 package-lock.json
 many.json
+listings.json
 *.csv
 newrelic_agent.log
 dump

@@ -1,15 +1,21 @@
  Reviews_staybnb
 Working on SDC Project
+
  To start the application: npm start (It starts on port: 7000)
+ 
  To build the bundle: npm run react-dev
 --------------------------------------------------
             To Populate the database
 --------------------------------------------------
  To populate mongo database with 10M records: npm run seed-mongo.
- To populate sequelize database with 10M records: npm run seed-sequelize
- To populate postgres database with 10M records: npm run build-csv and then npm run load-csv
- To populate sequelize database with 10M records: npm run seed-sequelize
- To populate mySQL database with 100 records: npm run seed1 and then npm run seed2
+ 
+ To populate sequelize database with 10M records: npm run seed-sequelize.
+ 
+ To populate postgres database with 10M records: npm run build-csv and then npm run load-csv.
+ 
+ To populate sequelize database with 10M records: npm run seed-sequelize.
+ 
+ To populate mySQL database with 100 records: npm run seed1 and then npm run seed2.
 
 --------------------------------------------------
             Docker

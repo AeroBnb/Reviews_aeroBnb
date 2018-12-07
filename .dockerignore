@@ -1,6 +1,7 @@
 node_modules
 npm-debug.log
-many.json
+listings.json
 **/*.csv
 **/*.pem
-
+dump
+newrelic_agent.log

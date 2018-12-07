@@ -13,3 +13,5 @@ package-lock.json
 many.json
 *.csv
 newrelic_agent.log
+dump
+newrelic_agent.log

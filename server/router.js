@@ -22,12 +22,12 @@ const router = express.Router();
 
 //-------MongoDB Controller-----------
 
-// router.get('/reviews', controller.getAllReviews);
-// router.get('/ratings', controller.getRatings);
-// router.get('/search', controller.search);
-// router.post('/reviews', controller.postReviews);
-// router.put('/reviews', controller.updateReviews);
-// router.delete('/reviews', controller.deleteReviews);
+router.get('/reviews', controller.getAllReviews);
+router.get('/ratings', controller.getRatings);
+router.get('/search', controller.search);
+router.post('/reviews', controller.postReviews);
+router.put('/reviews', controller.updateReviews);
+router.delete('/reviews', controller.deleteReviews);
 
 //--------Sequelize Controller ---------
 
@@ -48,12 +48,12 @@ const router = express.Router();
 
 //------------------- Knex Controller -----------------
 
-router.get('/reviews', knexController.getAllReviews);
-router.get('/ratings', knexController.getRatings);
-router.get('/search', knexController.search);
-router.post('/reviews', knexController.postReviews);
-router.put('/reviews', knexController.updateReviews);
-router.delete('/reviews', knexController.deleteReviews);
+// router.get('/reviews', knexController.getAllReviews);
+// router.get('/ratings', knexController.getRatings);
+// router.get('/search', knexController.search);
+// router.post('/reviews', knexController.postReviews);
+// router.put('/reviews', knexController.updateReviews);
+// router.delete('/reviews', knexController.deleteReviews);
 
 // Changes made
 
@@ -100,7 +100,6 @@ function ratings(reviews) {
 
 const ssr = (listingID) => {
   var props = {};
-  // console.log('I am in ssr');
   return new Promise((resolve, reject) => {
     getAllReviews(listingID, (data) => {
       props.reviews = data;
@@ -108,7 +107,6 @@ const ssr = (listingID) => {
       props.reviews[0].review_date = review_date;
       props.ratings = [ratings(props.reviews)];
       // getRatings(listingID, (result) => {
-      //   console.log('Ratings: ', result);
       //   props.ratings = result; 
         var avgObj = starsLoaded(props.ratings);
         var totalRatingsObj = reviewsLoaded(props.reviews);
@@ -129,7 +127,6 @@ const ssr = (listingID) => {
 // -------- Server Side Rendering for client side  -------- //
 router.get('/listing', function htmlTemplate(req, res) {
   var id =parseInt(req.query.id);
-  console.log(id);
   ssr(id)
     .then((results) => {
       res.end(`<!DOCTYPE html>
@@ -161,13 +158,12 @@ router.get('/listing', function htmlTemplate(req, res) {
 
 
 router.get('/renderReviews', (req, res) => {
-  console.log('I am in the Proxy Get')
 	ssr(req.query.id)
 		.then((results) => {
 			res.send(results);
 		})
 		.catch((err) => {
-			console.log(err);
+			console.error(err);
 			res.status(500).send();
 		});
 });

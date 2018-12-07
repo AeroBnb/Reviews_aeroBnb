@@ -1,5 +1,5 @@
-var mongoose = require('mongoose');
-var db = require('../../../database/mongoDB/mongoDB')
+// var mongoose = require('mongoose');
+// var db = require('../../../database/mongoDB/mongoDB')
 
 // var listingSchema = mongoose.Schema({
 //   l_id: Number,
@@ -24,13 +24,13 @@ var db = require('../../../database/mongoDB/mongoDB')
 // }, {collection: 'Listings'});
 
 
-var listingSchema = mongoose.Schema({
-  id: {type: Number, index: true},
-  reviews: Object,
-  avg_score: Object,
-  total_reviews: Number,
-  top_Five: Array,
-}, {collection: 'Listings'});
+// var listingSchema = mongoose.Schema({
+//   id: {type: Number, index: true},
+//   reviews: Object,
+//   avg_score: Object,
+//   total_reviews: Number,
+//   top_Five: Array,
+// }, {collection: 'Listings'});
 
   
   // var userSchema = mongoose.Schema({
@@ -46,7 +46,7 @@ var listingSchema = mongoose.Schema({
 
   // var Reviews = mongoose.model('Reviews', reviewSchema);
   // var Users = mongoose.model('Users', userSchema);
-  var Listings = mongoose.model('Listings', listingSchema);
+  // var Listings = mongoose.model('Listings', listingSchema);
 
   // Listings.find({id:99979})
   //   .exec(function(err, data) {
@@ -60,4 +60,4 @@ var listingSchema = mongoose.Schema({
   
 
 
-  module.exports = {Listings, db};
+  // module.exports = {Listings, db};

@@ -77,10 +77,10 @@ console.log(start);
 const getUserData = async function() {
   var count = 1;
   var listingsData = [];
-  for( let i = 0; i < 10; i++) {
+  for( let i = 0; i < 1000; i++) {
     var batch = '';
     await new Promise((resolve, reject) => {
-      for(let j = 0; j< 2; j++) {
+      for(let j = 0; j< 10000; j++) {
         var generatedReviews = reviewGenerator();
         var userData = {
           id: count,
@@ -93,9 +93,9 @@ const getUserData = async function() {
         count++;
       }
 
-      fs.appendFile('./many1.json', batch, (err) => {
+      fs.appendFile('./listings.json', batch, (err) => {
         console.log(
-          "User " + i + " took " + (Date.now() - prev) / 1000 + " seconds."
+          "Listings " + i + " took " + (Date.now() - prev) / 1000 + " seconds."
         );
         prev = Date.now();
         resolve();
@@ -110,7 +110,7 @@ const getUserData = async function() {
   var end = Date.now();
   console.log("User Generation took " + (end - start) / 1000 + " seconds. to insert 10,000,000");
 
-  var yourscript = exec('mongoimport --db SDCupdated --collection Users  --file ./many1.json',
+  var yourscript = exec('mongoimport --db SDC --collection Listings  --file ./listings.json',
         (error, stdout, stderr) => {
             console.log(`${stdout}`);
             console.log(`${stderr}`);

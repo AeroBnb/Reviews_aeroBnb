@@ -4,14 +4,12 @@ const start = Date.now();
 
 module.exports = {
   getAllReviews: (listingId, callback) => {
-    // console.log("Hello");
     // knex.select().from('reviews').where({r_id: 1})
     // .then(result => {
 		// 	console.log('ia ma in the knex connection ', result);
 
     // });
     
-    console.log('I am in the getAllReviews');
     knex.query(`SELECT *
       FROM Reviews
       LEFT  JOIN Users
@@ -29,7 +27,6 @@ module.exports = {
   },
 
   getRatings: (listingID, callback) => {
-    console.log('I am in the ratings');
     let SQLquery = `SELECT AVG(accuracy) AS accuracy, AVG(communication) AS communication, AVG(cleanliness) as cleanliness, AVG(location) as location, AVG(check_in) as checkin, AVG(value) as value
     FROM Reviews
     LEFT JOIN Users

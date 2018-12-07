@@ -175,7 +175,6 @@ module.exports = {
 
     Reviews.findOne({where: {[Op.and]: [{listings_id: listingID}, {user_id: query}]}})
       .then((review, error) => {
-        console.log(review);
         if(error) console.log(error);
         return review.destroy();
       })

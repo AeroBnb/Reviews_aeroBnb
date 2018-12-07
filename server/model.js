@@ -1,3 +1,5 @@
+//------------- mySQl model file -------------------//
+
 const db = require('../database/mySQL/index.js');
 
 
@@ -84,7 +86,6 @@ module.exports = {
   },
 
   updateReview: (listingID, body, callback) => {
-    console.log('body: ', body.reviews, 'listingID: ', listingID);
     var query = `UPDATE Reviews as r INNER JOIN Bookings as b 
     ON r.bookings_id = b.b_id
     LEFT JOIN Users as u 

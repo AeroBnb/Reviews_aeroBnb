@@ -1,5 +1,5 @@
-const db = require('../../../database/mySQL/index');
-const mongoDB = require('../../../database/mongoDB/mongoDB');
+// const db = require('../../../database/mySQL/index');
+const db = require('../../../database/mongoDB/mongoDB');
 const {Listings} = require('./model.js');
 // const {Users} = require('./model.js');
 
@@ -8,7 +8,7 @@ const postgres = require('../../../database/sequelize/postgres');
 module.exports = {
   getAllReviews: (listingID, callback) => {
     var start = Date.now();
-    Listings.findOne({id: listingID})
+    db.Listings.findOne({id: listingID})
       .exec(function(err, data) {
         if(err) {
           console.log('error: ', err);
@@ -23,7 +23,7 @@ module.exports = {
  
   getRatings: (listingID, callback) => {
     var start = Date.now();
-    Listings.findOne({id: listingID}).select('avg_score -_id')
+    db.Listings.findOne({id: listingID}).select('avg_score -_id')
       .exec(function(err, data) {
         if(err) {
           console.log('error');
@@ -37,7 +37,7 @@ module.exports = {
 
   search: (listingID, query, callback) => {
     var start = Date.now();
-    Listings.findOne({id: listingID, reviews: new RegExp(`^ ${query}$`, "i")})
+    db.Listings.findOne({id: listingID, reviews: new RegExp(`^ ${query}$`, "i")})
       .exec(function(err, data) {
         if(err) {
           console.log('error');
@@ -63,17 +63,15 @@ module.exports = {
       display_name: body.display_name,
       photo_url: body.photo_url
     }
-    Listings.update({id: listingID, "config.id": {"$eq": listingID}}, {"$push": {reviews: {obj}}})
+    db.Listings.update({id: listingID, "config.id": {"$eq": listingID}}, {"$push": {reviews: {obj}}})
       // Listings.update({id: listingID}, {reviews: {obj}}, {upsert: true})
       .exec(function(err, data) {
         if(err) {
           console.log('error', err);
         } else {
-          console.log(data);
           console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
         }
       });
-    console.log('In the post Review')
 
   },
 
@@ -92,21 +90,19 @@ module.exports = {
       photo_url: body.photo_url
     }
     // Listings.update({id: listingID}, {$addToSet: {reviews: body.reviews}})
-      Listings.update({id: listingID}, {reviews: {obj}}, {upsert: true})
+      db.Listings.update({id: listingID}, {reviews: {obj}}, {upsert: true})
       .exec(function(err, data) {
         if(err) {
           console.log('error', err);
         } else {
-          console.log(data);
           console.log(`Your Query took: , ${(Date.now() - start) / 1000} secs`);
         }
       });
-    console.log('In the update Review')
   },
 
   deleteReviews: (listingID, query, callback) => {
     var start = Date.now();
-    Listings.update({id: listingID, username: query.display_name}, {"$unset": {reviews: {display_name: {}}} })
+    db.Listings.update({id: listingID, username: query.display_name}, {"$unset": {reviews: {display_name: {}}} })
       .exec(function(err, data) {
         if(err) {
           console.log('error');
@@ -115,9 +111,5 @@ module.exports = {
           console.log((Date.now() - start) / 1000);
         }
       });
-    console.log('In the delete Review');
   }
-
-
-
 };

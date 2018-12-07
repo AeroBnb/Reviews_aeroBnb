@@ -3,7 +3,7 @@ const Host = 'localhost' || '34.212.166.131'
 // const config = require('../config.js');
 
 const knex = new Pool({
-  host: '34.212.166.131',
+  host: '34.219.251.191',
   database:'sdcknex',
   user: 'postgres',
   port: '5432',

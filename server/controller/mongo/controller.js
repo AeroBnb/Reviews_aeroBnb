@@ -2,7 +2,6 @@ const { getAllReviews, getRatings, search, postReviews, updateReviews, deleteRev
 
 module.exports = {
   getAllReviews: (req, res) => {
-    console.log(req.query);
     getAllReviews(req.query.id, (response) => {
       res.send(response);
     });
@@ -21,24 +20,19 @@ module.exports = {
   },
 
   postReviews: (req, res) => {
-    console.log(req.query);
-    console.log(req.body)
     postReviews(req.query.id, req.body, (response) => {
-      console.log(response)
       res.send(response);
     });
   },
 
   updateReviews: (req, res) => {
     updateReviews(req.query.id, req.body,(response) => {
-      console.log(response)
       res.send(response);
     });
   },
 
   deleteReviews: (req, res) => {
     deleteReviews(req.query.id, req.body,(response) => {
-      console.log(response)
       res.send(response);
     });
   },
